@@ -18,5 +18,5 @@ module.exports = {
    /*
     * NOTE: you need to export the model like so
     */
-  Evalutaion: createModel('evaluationSchema', evaluationSchema)
+  Evaluation: createModel('Evaluation', evaluationSchema)
 }
