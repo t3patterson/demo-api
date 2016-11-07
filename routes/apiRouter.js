@@ -2,22 +2,22 @@ let Router = require('express').Router;
 const apiRouter = Router()
 
 /*
- * NOTE: the model for the data-table should not have the name 'Resource'
+ * NOTE: import the Evaluation model
  */
-let Resource = require('../db/schema.js').Resource
+let Evaluation = require('../db/schema.js').Evaluation
 
 apiRouter
 /*
- * NOTE: the route should have a name that matches the name of the data-table
+ * NOTE: rename the routes
  */
- .get('/resources', function(req, res){
-   Resource.find(req.query , function(err, results){
-     if(err) return res.json(err)
-     res.json(results)
+ .get('/evaluations', function(req, res){
+    Evaluation.find(req.query , function(err, results){
+      if(err) return res.json(err)
+      res.json(results)
    })
  })
- .post('/resources', function(req, res){
-     let newRecord = new Resource(req.body)
+ .post('/evaluations', function(req, res){
+     let newRecord = new Evaluation(req.body)
 
      newRecord.save(function(err, record){
         if(err) return res.status(500).send('server/db error on attempt to save user to db')
@@ -29,16 +29,16 @@ apiRouter
 
 
 apiRouter
- .get('/resources/:_id', function(req, res){
-   Resource.findById(req.params._id, "-password", function(err, record){
+ .get('/evaluations/:_id', function(req, res){
+   Evaluation.findById(req.params._id, "-password", function(err, record){
      if(err || !record ) return res.json(err)
      res.json(record)
    })
  })
 
- .put('/resources/:_id', function(req, res){
+ .put('/evaluations/:_id', function(req, res){
 
-   Resource.findByIdAndUpdate(req.params._id, req.body, function(err, record){
+   Evaluation.findByIdAndUpdate(req.params._id, req.body, function(err, record){
        if (err) {
          res.status(500).send(err)
        }
@@ -51,8 +51,8 @@ apiRouter
    })
  })
 
- .delete('/resources/:_id', function(req, res){
-   Resource.remove({ _id: req.params._id}, (err) => {
+ .delete('/evaluations/:_id', function(req, res){
+   Evaluation.remove({ _id: req.params._id}, (err) => {
      if(err) return res.json(err)
      res.json({
        msg: `record ${req.params._id} successfully deleted`,
@@ -62,8 +62,8 @@ apiRouter
  })
 
  // TO DELETE ALL:
- // .delete("/resources/all/records", function(req, res){
- //   Resource.remove({}, (err) => {
+ // .delete("/evaluations/all/records", function(req, res){
+ //   Evaluation.remove({}, (err) => {
  //     if(err) return res.json(err)
  //     res.json({
  //       msg: `EVEYTHING successfully deleted`

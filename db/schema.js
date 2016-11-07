@@ -3,22 +3,20 @@ const createModel = mongoose.model.bind(mongoose);
 const Schema = mongoose.Schema;
 
 // ----------------------
-// DATA TABLE
+// DATA TABLE - Evaluation
 // ----------------------
-const resourceSchema = new Schema({
-  // example of optional fields
-  // title:        { type: String, required: true },
-  // description:  { type: String },
-  // upVotes:      { number: String, default: 0 },
+const evaluationSchema = new Schema({
+  imgLink:      { type: String, required: true },
+  description:  { type: String, required: true },
+  upVotes:      { number: String, default: 0 },
   createdAt:    { type: Date, default: Date.now }
-
 })
 
 
 
 module.exports = {
    /*
-    * NOTE: you would ideally change the export-value and the model-name
+    * NOTE: you need to export the model like so
     */
-  Resource: createModel('Resource', resourceSchema)
+  Evalutaion: createModel('evaluationSchema', evaluationSchema)
 }
